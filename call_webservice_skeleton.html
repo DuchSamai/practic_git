@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>List of students</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="List of all students">
+	<meta name="author" content="Laura Hennequin">
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<div id="content">
+		Loading data from web service, please wait...
+	</div>
+	<ul id="show">
+		
+	</ul>
+	<script>
+$(document).ready(function(){
+	$.ajax({
+		method:"GET",
+       url: "http://kratie.pnc.lan/laura.hennequin/ssl/web.service/all_students_json.php",
+       dataType:"json"
+   })
+  .done(function( data ) {
+	var store='';
+	$.each(data, function () {
+
+		store +="<li>"+this.name+" ,form "+this.city+"</li></br>";
+	
+    });
+	$( "#show" ).html( store );
+  })
+  .fail(function(error){
+	alert( "error" );
+
+  });
+});
+	</script>
+
+</body>
+</html>
